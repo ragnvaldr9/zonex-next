@@ -1,8 +1,10 @@
+import MainLink from "../components/_ui/MainLink/MainLik"
+
 const Index = () => {
 
   return (
     <>
-      <h1>Index</h1>
+      <MainLink to='/'>Elements</MainLink>
     </>
   )
 }
