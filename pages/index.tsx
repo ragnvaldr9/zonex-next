@@ -1,4 +1,4 @@
-import MainLink from "../components/_ui/MainLink/MainLik"
+import MainLink from "../components/_ui-elements/MainLink/MainLik"
 
 const Index = () => {
 
