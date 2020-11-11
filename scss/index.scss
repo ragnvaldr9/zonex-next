@@ -10,6 +10,12 @@ body {
   font-weight: 500;
   color: var(--color-dark);
   background-color: var(--color-white);
+
+  padding: 50px;
 }
 
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
 
