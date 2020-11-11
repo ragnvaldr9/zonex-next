@@ -1,0 +1,28 @@
+body {
+  overflow-anchor: none;
+  margin: 0;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  color: var(--color-dark);
+  background-color: var(--color-white);
+
+  padding: 50px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 40px;
+
+  @include xs {
+    padding: 0 15px;
+  }
+}
+
+.container-narrow {
+  max-width: 1406px;
+}
