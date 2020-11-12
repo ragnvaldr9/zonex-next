@@ -7,5 +7,5 @@ export const testProduct = {
   title: 'Eye Mesh Boat Shoes',
   currency: '$',
   price: 220.00,
-  oldPrice: '165',
+  oldPrice: 165.00,
 }

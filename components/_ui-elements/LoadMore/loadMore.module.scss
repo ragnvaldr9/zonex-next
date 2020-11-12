@@ -1,0 +1,31 @@
+.loadMore {
+  border: none;
+  padding: 0;
+  background: 0 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 95px;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-gray);
+
+  span {
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  svg {
+    width: 12px;
+    height: 21px;
+    fill: var(--color-dark);
+    transition: transform 0.3s;
+  }
+
+  &:hover {
+    svg {
+      transform: translateY(5px);
+      transition: transform 0.3s;
+    }
+  }
+}
