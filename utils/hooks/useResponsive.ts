@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 type TScreenValue = 'isMobile' | 'isTablet' | 'isLaptop' | 'isDesktop' | 'isBigScreen'
 
@@ -6,7 +6,12 @@ type TScreenParams<T> = {
   [T in TScreenValue]: boolean
 }
 
-const defaultConfig = {
+type TUseResponsiveConfig = {
+  breakpoints?: any,
+  initialScreen?: TScreenValue
+} 
+
+const defaultConfig: TUseResponsiveConfig = {
   breakpoints: {
     desktop_min: 1440,
     laptop_max: 1439,
@@ -33,7 +38,8 @@ const IdMobileHeight = {
 }
 
 const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenParams<TScreenValue> => {
-  const [state, setState] = useState((initialScreen: TScreenValue) => {
+  
+  const setScreenParams = useCallback((initialScreen: TScreenValue) => {
     if (!initialScreen) initialScreen = 'isMobile'
 
     const values = ['isMobile', 'isTablet', 'isLaptop', 'isDesktop', 'isBigScreen']
@@ -43,20 +49,16 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
     values.forEach((value) => (result[value] = value === initialScreen ? true : false))
 
     return result
-  })
+  }, [])
+
+  const [state, setState] = useState(setScreenParams(initialScreen))
 
   const screen = useRef({
     width: null
     // height: null
   })
 
-  const currentScreen = useRef({
-    isMobile: true,
-    isTablet: false,
-    isLaptop: false,
-    isDesktop: false,
-    isBigScreen: false
-  })
+  const currentScreen = useRef(setScreenParams(initialScreen))
 
   const getWindowDimension = () => {
     const width =
@@ -72,55 +74,31 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
   }
 
   const updateScreen = () => {
+
     if (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile) {
       console.log('mobile')
-
-      setCurrentScreen({
-        isMobile: true,
-        isTablet: false,
-        isLaptop: false,
-        isDesktop: false,
-        isBigScreen: false
-      })
+      setCurrentScreen(setScreenParams('isMobile'))
     } else if (
       screen.current.width >= breakpoints.tablet_min &&
       screen.current.width <= breakpoints.tablet_max &&
       !currentScreen.current.isTablet
     ) {
       console.log('tablet')
-
-      setCurrentScreen({
-        isMobile: false,
-        isTablet: true,
-        isLaptop: false,
-        isDesktop: false,
-        isBigScreen: false
-      })
+      setCurrentScreen(setScreenParams('isTablet'))
     } else if (
       screen.current.width >= breakpoints.laptop_min &&
       screen.current.width <= breakpoints.laptop_max &&
       !currentScreen.current.isLaptop
     ) {
       console.log('laptop')
-      setCurrentScreen({
-        isMobile: false,
-        isTablet: false,
-        isLaptop: true,
-        isDesktop: false,
-        isBigScreen: false
-      })
+
+      setCurrentScreen(setScreenParams('isLaptop'))
     } else if (
       screen.current.width >= breakpoints.desktop_min &&
       !currentScreen.current.isDesktop
     ) {
       console.log('desktop')
-      setCurrentScreen({
-        isMobile: false,
-        isTablet: false,
-        isLaptop: false,
-        isDesktop: true,
-        isBigScreen: false
-      })
+      setCurrentScreen(setScreenParams('isDesktop'))
     }
   }
 
