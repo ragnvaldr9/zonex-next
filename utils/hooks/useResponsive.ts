@@ -1,5 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
 
+type TScreenValue = 'isMobile' | 'isTablet' | 'isLaptop' | 'isDesktop' | 'isBigScreen'
+
+type TScreenParams<T> = {
+  [T in TScreenValue]: boolean
+}
+
+const defaultConfig = {
+  breakpoints: {
+    desktop_min: 1440,
+    laptop_max: 1439,
+    laptop_min: 1024,
+    tablet_min: 768,
+    tablet_max: 1023,
+    mobile_max: 767
+  },
+  initialScreen: 'isMobile'
+}
+
 const defaultBreakpoints = {
   desktop_min: 1440,
   laptop_max: 1439,
@@ -14,14 +32,17 @@ const IdMobileHeight = {
   mobileLandscape_max: 425
 }
 
-const useResponsive = (breakpoints = defaultBreakpoints) => {
-  
-  const [state, setState] = useState({
-    isMobile: true,
-    isTablet: false,
-    isLaptop: false,
-    isDesktop: false,
-    isBigScreen: false
+const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenParams<TScreenValue> => {
+  const [state, setState] = useState((initialScreen: TScreenValue) => {
+    if (!initialScreen) initialScreen = 'isMobile'
+
+    const values = ['isMobile', 'isTablet', 'isLaptop', 'isDesktop', 'isBigScreen']
+
+    let result = {}
+
+    values.forEach((value) => (result[value] = value === initialScreen ? true : false))
+
+    return result
   })
 
   const screen = useRef({
@@ -46,14 +67,14 @@ const useResponsive = (breakpoints = defaultBreakpoints) => {
   }
 
   const setCurrentScreen = (options) => {
-    currentScreen.current = {...options}
-    setState(() => ({...options}))
+    currentScreen.current = { ...options }
+    setState(() => ({ ...options }))
   }
 
   const updateScreen = () => {
     if (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile) {
       console.log('mobile')
-      
+
       setCurrentScreen({
         isMobile: true,
         isTablet: false,
@@ -67,7 +88,7 @@ const useResponsive = (breakpoints = defaultBreakpoints) => {
       !currentScreen.current.isTablet
     ) {
       console.log('tablet')
-      
+
       setCurrentScreen({
         isMobile: false,
         isTablet: true,
