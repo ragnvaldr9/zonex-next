@@ -6,7 +6,7 @@ const defaultBreakpoints = {
   laptop_min: 1024,
   tablet_min: 768,
   tablet_max: 1023,
-  mobile_max: 767,
+  mobile_max: 767
 }
 
 const IdMobileHeight = {
@@ -15,12 +15,18 @@ const IdMobileHeight = {
 }
 
 const useResponsive = (breakpoints = defaultBreakpoints) => {
+  
   const [state, setState] = useState({
     isMobile: true,
     isTablet: false,
     isLaptop: false,
     isDesktop: false,
     isBigScreen: false
+  })
+
+  const screen = useRef({
+    width: null
+    // height: null
   })
 
   const currentScreen = useRef({
@@ -39,102 +45,77 @@ const useResponsive = (breakpoints = defaultBreakpoints) => {
     return { width, height }
   }
 
-  const screen = useRef({
-    width: null
-    // height: null
-  })
+  const setCurrentScreen = (options) => {
+    currentScreen.current = {...options}
+    setState(() => ({...options}))
+  }
 
-  const handleResize = () => {
-    const { width, height } = getWindowDimension()
-    screen.current.width = width
-    // screen.current.height = height
-
+  const updateScreen = () => {
     if (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile) {
       console.log('mobile')
-
-      currentScreen.current = {
+      
+      setCurrentScreen({
         isMobile: true,
         isTablet: false,
         isLaptop: false,
         isDesktop: false,
         isBigScreen: false
-      }
-
-      setState(() => ({
-        isMobile: true,
-        isTablet: false,
-        isLaptop: false,
-        isDesktop: false,
-        isBigScreen: false
-      }))
+      })
     } else if (
       screen.current.width >= breakpoints.tablet_min &&
       screen.current.width <= breakpoints.tablet_max &&
       !currentScreen.current.isTablet
     ) {
       console.log('tablet')
-      currentScreen.current = {
+      
+      setCurrentScreen({
         isMobile: false,
         isTablet: true,
         isLaptop: false,
         isDesktop: false,
         isBigScreen: false
-      }
-
-      setState(() => ({
-        isMobile: false,
-        isTablet: true,
-        isLaptop: false,
-        isDesktop: false,
-        isBigScreen: false
-      }))
+      })
     } else if (
       screen.current.width >= breakpoints.laptop_min &&
       screen.current.width <= breakpoints.laptop_max &&
       !currentScreen.current.isLaptop
     ) {
       console.log('laptop')
-      currentScreen.current = {
+      setCurrentScreen({
         isMobile: false,
         isTablet: false,
         isLaptop: true,
         isDesktop: false,
         isBigScreen: false
-      }
-
-      setState(() => ({
-        isMobile: false,
-        isTablet: false,
-        isLaptop: true,
-        isDesktop: false,
-        isBigScreen: false
-      }))
+      })
     } else if (
       screen.current.width >= breakpoints.desktop_min &&
       !currentScreen.current.isDesktop
     ) {
       console.log('desktop')
-      currentScreen.current = {
+      setCurrentScreen({
         isMobile: false,
         isTablet: false,
         isLaptop: false,
         isDesktop: true,
         isBigScreen: false
-      }
-
-      setState(() => ({
-        isMobile: false,
-        isTablet: false,
-        isLaptop: false,
-        isDesktop: true,
-        isBigScreen: false
-      }))
+      })
     }
+  }
+
+  const handleResize = () => {
+    const { width, height } = getWindowDimension()
+    screen.current.width = width
+    // screen.current.height = height
+    updateScreen()
   }
 
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize, false)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   return state
