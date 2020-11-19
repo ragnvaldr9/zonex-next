@@ -1,39 +1,32 @@
-import Link from 'next/link'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { exampleOperations } from '../redux/ducks/example'
 import { GetServerSideProps } from 'next'
+import Header from '../components/shared/Header/Header'
+import Product from '../components/shared/Product/Product'
+import Button from '../components/_ui-elements/Button/Button'
+import LoadMore from '../components/_ui-elements/LoadMore/LoadMore'
+import MainLink from '../components/_ui-elements/MainLink/MainLik'
+import SVGSprite from '../components/_ui-elements/SVGSprite/SVGSprite'
+import { mainNav, testProduct } from '../utils/testData'
 
-const Index = ({ users }) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const userAgent = context.req.headers['user-agent']
+  console.log(userAgent)
 
-  const dispatch = useDispatch()
-  const setUsers = (data) => dispatch(exampleOperations.setUsers(data))
-  
-  useEffect(() => {
-    setUsers(users)
-  }, [dispatch, users])
-
-  return (
-    <>
-      <h1>Index</h1>
-      <Link href='/about'>About</Link>
-    </>
-  )
+  return {
+    props: {
+      userAgent
+    }
+  }
 }
 
-export async function getServerSideProps() {
-  // Fetch data from external API
-  let data = []
-
-  try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users`)
-    data = await res.json()
-  } catch (err) {
-    console.error(err)
-  }
-
-  // Pass data to the page via props
-  return { props: { users: data }}
+const Index = () => {
+  return (
+    <>
+      <Header navData={mainNav} />
+      <div style={{ width: '260px' }}>
+        <LoadMore />
+      </div>
+    </>
+  )
 }
 
 export default Index

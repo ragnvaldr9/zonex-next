@@ -1,0 +1,52 @@
+@mixin font-face($font-family, $url, $weight) {
+  @font-face {
+    font-family: '#{$font-family}';
+    src: url('../public/fonts/#{$url}.woff2') format('woff2'),
+    url('../public/fonts/#{$url}.woff') format('woff');
+    font-weight: #{$weight};
+    font-display: swap;
+    font-style: normal;
+  }
+}
+
+@mixin desktop {
+	@media (min-width: (1025px)) {
+		@content;
+	}
+}
+
+@mixin lg-max {
+  @media (max-width: (1700px)) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: (1500px)) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: (1200px)) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: (768px)) {
+    @content;
+  }
+}
+
+@mixin xs {
+  @media (max-width: (576px)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+	@media (max-width: (1024px)) {
+		@content;
+	}
+}
