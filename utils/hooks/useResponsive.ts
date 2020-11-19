@@ -23,20 +23,6 @@ const defaultConfig: TUseResponsiveConfig = {
   initialScreen: 'isMobile'
 }
 
-const defaultBreakpoints = {
-  desktop_min: 1440,
-  laptop_max: 1439,
-  laptop_min: 1024,
-  tablet_min: 768,
-  tablet_max: 1023,
-  mobile_max: 767
-}
-
-const IdMobileHeight = {
-  mobileLandscape_min: 320,
-  mobileLandscape_max: 425
-}
-
 const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenParams<TScreenValue> => {
   
   const setScreenParams = useCallback((initialScreen: TScreenValue) => {
@@ -74,31 +60,15 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
   }
 
   const updateScreen = () => {
+    const screenMap = new Map([
+      [() => (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile), 'isMobile'],
+      [() => (screen.current.width >= breakpoints.tablet_min && screen.current.width <= breakpoints.tablet_max && !currentScreen.current.isTablet), 'isTablet'],
+      [() => (screen.current.width >= breakpoints.laptop_min && screen.current.width <= breakpoints.laptop_max && !currentScreen.current.isLaptop), 'isLaptop'],
+      [() => (screen.current.width >= breakpoints.desktop_min && !currentScreen.current.isDesktop), 'isDesktop']
+    ])
 
-    if (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile) {
-      console.log('mobile')
-      setCurrentScreen(setScreenParams('isMobile'))
-    } else if (
-      screen.current.width >= breakpoints.tablet_min &&
-      screen.current.width <= breakpoints.tablet_max &&
-      !currentScreen.current.isTablet
-    ) {
-      console.log('tablet')
-      setCurrentScreen(setScreenParams('isTablet'))
-    } else if (
-      screen.current.width >= breakpoints.laptop_min &&
-      screen.current.width <= breakpoints.laptop_max &&
-      !currentScreen.current.isLaptop
-    ) {
-      console.log('laptop')
-
-      setCurrentScreen(setScreenParams('isLaptop'))
-    } else if (
-      screen.current.width >= breakpoints.desktop_min &&
-      !currentScreen.current.isDesktop
-    ) {
-      console.log('desktop')
-      setCurrentScreen(setScreenParams('isDesktop'))
+    for (let [entry, value] of screenMap) { 
+      entry() && setCurrentScreen(setScreenParams(value))
     }
   }
 
@@ -116,7 +86,7 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
+  //@ts-ignore
   return state
 }
 
