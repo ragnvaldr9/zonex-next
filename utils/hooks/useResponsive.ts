@@ -25,12 +25,12 @@ const defaultConfig: TUseResponsiveConfig = {
 
 const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenParams<TScreenValue> => {
   
-  const setScreenParams = useCallback((initialScreen: TScreenValue) => {
+  const setScreenParams = useCallback((initialScreen: TScreenValue): TScreenParams<TScreenValue> => {
     if (!initialScreen) initialScreen = 'isMobile'
 
     const values = ['isMobile', 'isTablet', 'isLaptop', 'isDesktop', 'isBigScreen']
 
-    let result = {}
+    let result = {} as TScreenParams<TScreenValue>
 
     values.forEach((value) => (result[value] = value === initialScreen ? true : false))
 
@@ -54,13 +54,13 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
     return { width, height }
   }
 
-  const setCurrentScreen = (options) => {
+  const setCurrentScreen = (options: TScreenParams<TScreenValue>) => {
     currentScreen.current = { ...options }
     setState(() => ({ ...options }))
   }
 
   const updateScreen = () => {
-    const screenMap = new Map([
+    const screenMap: Map<() => Boolean, TScreenValue> = new Map([
       [() => (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile), 'isMobile'],
       [() => (screen.current.width >= breakpoints.tablet_min && screen.current.width <= breakpoints.tablet_max && !currentScreen.current.isTablet), 'isTablet'],
       [() => (screen.current.width >= breakpoints.laptop_min && screen.current.width <= breakpoints.laptop_max && !currentScreen.current.isLaptop), 'isLaptop'],
@@ -86,7 +86,7 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-  //@ts-ignore
+
   return state
 }
 
