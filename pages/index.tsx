@@ -5,15 +5,16 @@ import Button from '../components/_ui-elements/Button/Button'
 import LoadMore from '../components/_ui-elements/LoadMore/LoadMore'
 import MainLink from '../components/_ui-elements/MainLink/MainLik'
 import SVGSprite from '../components/_ui-elements/SVGSprite/SVGSprite'
+import { detectInitialDeviceType } from '../utils/detectInitialDeviceType'
 import { mainNav, testProduct } from '../utils/testData'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const userAgent = context.req.headers['user-agent']
-  console.log(userAgent)
+  
+  const initialDeviceType = detectInitialDeviceType(context.req.headers['user-agent'])
 
   return {
     props: {
-      userAgent
+      initialDeviceType
     }
   }
 }
