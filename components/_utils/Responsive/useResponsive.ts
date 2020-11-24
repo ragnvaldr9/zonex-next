@@ -1,29 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { TScreenParams, TScreenValue } from './types'
 
-type TScreenValue = 'isMobile' | 'isTablet' | 'isLaptop' | 'isDesktop' | 'isBigScreen'
-
-type TScreenParams<T> = {
-  [T in TScreenValue]: boolean
+const defaultBreakpoints = {
+  desktop_min: 1440,
+  laptop_max: 1439,
+  laptop_min: 1024,
+  tablet_min: 768,
+  tablet_max: 1023,
+  mobile_max: 767
 }
 
-type TUseResponsiveConfig = {
-  breakpoints?: any,
-  initialScreen?: TScreenValue
-} 
-
-const defaultConfig: TUseResponsiveConfig = {
-  breakpoints: {
-    desktop_min: 1440,
-    laptop_max: 1439,
-    laptop_min: 1024,
-    tablet_min: 768,
-    tablet_max: 1023,
-    mobile_max: 767
-  },
-  initialScreen: 'isMobile'
-}
-
-const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenParams<TScreenValue> => {
+const useResponsive = (breakpoints: typeof defaultBreakpoints = defaultBreakpoints, initialScreen: TScreenValue = 'isMobile'): TScreenParams<TScreenValue> => {
   
   const setScreenParams = useCallback((initialScreen: TScreenValue): TScreenParams<TScreenValue> => {
     if (!initialScreen) initialScreen = 'isMobile'
@@ -41,7 +28,6 @@ const useResponsive = ({ breakpoints, initialScreen } = defaultConfig): TScreenP
 
   const screen = useRef({
     width: null
-    // height: null
   })
 
   const currentScreen = useRef(setScreenParams(initialScreen))
