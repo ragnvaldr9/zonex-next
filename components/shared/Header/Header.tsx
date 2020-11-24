@@ -15,7 +15,7 @@ const Header: React.FC<{navData: Array<TNavItem>}> = ({ navData }) => {
     <header className={css.header}>
       <div className={clsx(css.headerInner, 'container', 'container-narrow ')}>
         {/* {!isMobile && <HeaderNav navData={navData} />} */}
-        <Responsive renderOn={['isMobile', 'isDesktop']}>
+        <Responsive renderOn={['isMobile']}>
           <div style={{width: '200px', height: '200px', background: '#000'}}></div>
         </Responsive>
       </div>
