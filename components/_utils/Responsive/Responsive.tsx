@@ -1,18 +1,10 @@
+import { shallowEqual, useSelector } from 'react-redux'
+import { deviceSelectors } from "../../../redux/ducks/device"
 import { TScreenParams, TScreenValue } from "./types"
-import useResponsive from "./useResponsive"
 
 const Responsive: React.FC<{renderOn: Array<TScreenValue>}> = ({ renderOn, children }) => {
 
-  const breakpoints = {
-    desktop_min: 1440,
-    laptop_max: 1439,
-    laptop_min: 1024,
-    tablet_min: 768,
-    tablet_max: 1023,
-    mobile_max: 767
-  }
-
-  const screenParams = useResponsive(breakpoints, 'isMobile')
+  const screenParams = useSelector((state) => deviceSelectors.selectScreenOptions(state), shallowEqual)
 
   const shouldRender = (screenState: TScreenParams<TScreenValue>, selectedScreens: Array<TScreenValue>) => {
     return selectedScreens.reduce((acc: boolean, b: TScreenValue) => {
@@ -22,7 +14,6 @@ const Responsive: React.FC<{renderOn: Array<TScreenValue>}> = ({ renderOn, child
   }
 
   return <>{shouldRender(screenParams, renderOn) && children}</>
-
 }
 
 export default Responsive

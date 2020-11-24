@@ -10,11 +10,16 @@ import { mainNav, testProduct } from '../utils/testData'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   
-  const initialDeviceType = detectInitialDeviceType(context.req.headers['user-agent'])
+  const {initialDeviceType, screenOptions} = detectInitialDeviceType(context.req.headers['user-agent'])
 
   return {
     props: {
-      initialDeviceType
+      initialReduxState: {
+        device: {
+          initialDeviceType,
+          screenOptions
+        }
+      }
     }
   }
 }

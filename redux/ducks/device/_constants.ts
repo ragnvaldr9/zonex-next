@@ -1,0 +1,7 @@
+const SET_DEVICE = 'device/SET_DEVICE',
+      SET_SCREEN_OPTIONS = 'device/SET_SCREEN_OPTIONS'
+
+export default {
+  SET_DEVICE,
+  SET_SCREEN_OPTIONS
+}
