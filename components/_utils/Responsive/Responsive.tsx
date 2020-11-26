@@ -12,7 +12,7 @@ const Responsive: React.FC<{renderOn: Array<TScreenValue>}> = ({ renderOn, child
       return acc
     }, null)
   }
-
+  
   return <>{shouldRender(screenParams, renderOn) && children}</>
 }
 
