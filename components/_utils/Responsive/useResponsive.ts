@@ -45,27 +45,28 @@ const useResponsive = (breakpoints: typeof defaultBreakpoints = defaultBreakpoin
     setState(() => ({ ...options }))
   }
 
-  const updateScreen = () => {
-    const screenMap: Map<() => Boolean, TScreenValue> = new Map([
-      [() => (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile), 'isMobile'],
-      [() => (screen.current.width >= breakpoints.tablet_min && screen.current.width <= breakpoints.tablet_max && !currentScreen.current.isTablet), 'isTablet'],
-      [() => (screen.current.width >= breakpoints.laptop_min && screen.current.width <= breakpoints.laptop_max && !currentScreen.current.isLaptop), 'isLaptop'],
-      [() => (screen.current.width >= breakpoints.desktop_min && !currentScreen.current.isDesktop), 'isDesktop']
-    ])
-
-    for (let [entry, value] of screenMap) { 
-      entry() && setCurrentScreen(setScreenParams(value))
-    }
-  }
-
-  const handleResize = () => {
-    const { width, height } = getWindowDimension()
-    screen.current.width = width
-    // screen.current.height = height
-    updateScreen()
-  }
-
   useEffect(() => {
+
+    const updateScreen = () => {
+      const screenMap: Map<() => Boolean, TScreenValue> = new Map([
+        [() => (screen.current.width <= breakpoints.mobile_max && !currentScreen.current.isMobile), 'isMobile'],
+        [() => (screen.current.width >= breakpoints.tablet_min && screen.current.width <= breakpoints.tablet_max && !currentScreen.current.isTablet), 'isTablet'],
+        [() => (screen.current.width >= breakpoints.laptop_min && screen.current.width <= breakpoints.laptop_max && !currentScreen.current.isLaptop), 'isLaptop'],
+        [() => (screen.current.width >= breakpoints.desktop_min && !currentScreen.current.isDesktop), 'isDesktop']
+      ])
+  
+      for (let [entry, value] of screenMap) { 
+        entry() && setCurrentScreen(setScreenParams(value))
+      }
+    }
+
+    const handleResize = () => {
+      const { width, height } = getWindowDimension()
+      screen.current.width = width
+      // screen.current.height = height
+      updateScreen()
+    }
+
     handleResize()
     window.addEventListener('resize', handleResize, false)
     return () => {
