@@ -7,8 +7,8 @@ const Responsive: React.FC<{renderOn: Array<TScreenValue>}> = ({ renderOn, child
   const screenParams = useSelector((state) => deviceSelectors.selectScreenOptions(state), shallowEqual)
 
   const shouldRender = (screenState: TScreenParams<TScreenValue>, selectedScreens: Array<TScreenValue>) => {
-    return selectedScreens.reduce((acc: boolean, b: TScreenValue) => {
-      if (screenState[b]) acc = true
+    return selectedScreens.reduce((acc: boolean, screen: TScreenValue) => {
+      if (screenState[screen]) acc = true
       return acc
     }, null)
   }
