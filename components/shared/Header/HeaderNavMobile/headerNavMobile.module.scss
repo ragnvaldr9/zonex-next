@@ -1,0 +1,84 @@
+@import '../../../../scss/mixins';
+
+.nav {
+  position: absolute;
+  transform: translateX(-110%);
+  top: 100%;
+  width: 100%;
+  max-width: 600px;
+  height: 80vh;
+  background-color: var(--color-white);
+  transition: transform 0.3s;
+  &._open {
+    transform: translateX(0);
+  }
+}
+
+.burger {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .2s ease-in-out;
+  cursor: pointer;
+}
+ 
+.burgerBar {
+  display: block;
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background: var(--color-dark);
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .2s ease-in-out;
+
+  &:nth-child(1) {
+    top: 0px;
+  }
+
+  &:nth-child(2), &:nth-child(3) {
+    top: 10px;
+  }
+
+  &:nth-child(4) {
+    top: 20px;
+  }
+}
+
+.burger._open {
+  .burgerBar:nth-child(1) {
+    top: 10px;
+    width: 0%;
+    left: 50%;
+  }
+
+  .burgerBar:nth-child(2) {
+    transform: rotate(45deg);
+  }
+
+  .burgerBar:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  .burgerBar:nth-child(4) {
+    top: 15px;
+    width: 0%;
+    left: 50%;
+  }
+}
+
+.nav {
+  &List {
+    display: block;
+  }
+
+  &Item {
+    padding: 10px 0;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
