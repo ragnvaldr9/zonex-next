@@ -1,0 +1,18 @@
+@import '../../../../scss/mixins';
+
+.nav {
+  &List {
+    display: flex;
+  }
+
+  &Item {
+    &:not(:last-child) {
+      margin-right: 45px;
+    }
+  }
+
+  &_visible {
+    left: 0;
+    transition: left 0.3s;
+  }
+}
