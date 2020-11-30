@@ -1,8 +1,8 @@
-import { TNavItem } from './headerTypes'
-import css from './header.module.scss'
-import MainLink from '../../_ui-elements/MainLink/MainLik'
+import { TNavItem } from '../headerTypes'
+import css from './headerNavDesktop.module.scss'
+import MainLink from '../../../_ui-elements/MainLink/MainLik'
 
-const HeaderNav: React.FC<{navData: Array<TNavItem>}> = ({ navData }) => {
+const HeaderNavDesktop: React.FC<{navData: Array<TNavItem>}> = ({ navData }) => {
   return (
     <nav className={css.nav}>
       <ul className={css.navList}>
@@ -19,4 +19,4 @@ const HeaderNav: React.FC<{navData: Array<TNavItem>}> = ({ navData }) => {
   )
 }
 
-export default HeaderNav
+export default HeaderNavDesktop
