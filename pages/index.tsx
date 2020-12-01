@@ -21,9 +21,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const Index = () => {
   return (
-    <>
+    <div className='site-wrapper'>
       <Header navData={mainNav} />
-    </>
+    </div>
   )
 }
 
