@@ -2,29 +2,11 @@ import clsx from 'clsx'
 import { FC } from 'react'
 import SwiperCore, { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { mainHeroItems } from '../../../utils/testData'
 
 import css from './indexHero.module.scss'
 
-const items = [
-  {
-    id: 1,
-    title: 'Fall-Winter Clearance Sales',
-    description: 'All Sale Items are Final Sale / Free Shipping on All Orders',
-    image: 'images/main/hero/girl.png'
-  },
-  {
-    id: 2,
-    title: 'Fall-Winter Clearance Sales',
-    description: 'All Sale Items are Final Sale / Free Shipping on All Orders',
-    image: 'images/main/hero/girl.png'
-  },
-  {
-    id: 3,
-    title: 'Fall-Winter Clearance Sales',
-    description: 'All Sale Items are Final Sale / Free Shipping on All Orders',
-    image: 'images/main/hero/girl.png'
-  }
-]
+const items = mainHeroItems
 
 type THeroItem = {
   title: string
