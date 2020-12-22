@@ -36,3 +36,24 @@ export const mainNav = [
     active: false
   }
 ]
+
+export const mainHeroItems = [
+  {
+    id: 1,
+    title: 'Fall-Winter Clearance Sales',
+    description: 'All Sale Items are Final Sale / Free Shipping on All Orders',
+    image: 'images/main/hero/girl.png'
+  },
+  {
+    id: 2,
+    title: 'Fall-Winter Clearance Sales',
+    description: 'All Sale Items are Final Sale / Free Shipping on All Orders',
+    image: 'images/main/hero/girl.png'
+  },
+  {
+    id: 3,
+    title: 'Fall-Winter Clearance Sales',
+    description: 'All Sale Items are Final Sale / Free Shipping on All Orders',
+    image: 'images/main/hero/girl.png'
+  }
+]
