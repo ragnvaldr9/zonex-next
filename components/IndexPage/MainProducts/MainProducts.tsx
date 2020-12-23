@@ -13,10 +13,10 @@ const nav = [
 
 const products = [
   {id: 1, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-1.jpg', price: 100, currency: '$', link: '/'},
-  {id: 1, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-2.jpg', price: 100, currency: '$', link: '/'},
-  {id: 1, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-3.jpg', price: 100, currency: '$', link: '/'},
-  {id: 1, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-4.jpg', price: 100, currency: '$', link: '/'},
-  {id: 1, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-5.jpg', price: 100, currency: '$', link: '/'},
+  {id: 2, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-2.jpg', price: 100, currency: '$', link: '/'},
+  {id: 3, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-3.jpg', price: 100, currency: '$', link: '/'},
+  {id: 4, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-4.jpg', price: 100, currency: '$', link: '/'},
+  {id: 5, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-5.jpg', price: 100, currency: '$', link: '/'},
 ]
 
 const MainProductsNav: FC = () => {

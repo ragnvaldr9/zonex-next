@@ -28,8 +28,8 @@ const IndexHero: FC = () => {
               className={css.carousel}
               spaceBetween={0}
               slidesPerView={1}
-              onSlideChange={() => console.log('slide change')}
-              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => {}}
+              onSwiper={(swiper) => {}}
               pagination={{ clickable: true, modifierClass: 'heroPagination-' }}
             >
               {items.map((item) => (
