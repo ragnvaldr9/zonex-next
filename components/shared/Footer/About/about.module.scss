@@ -1,0 +1,113 @@
+@import '../../../../scss/mixins';
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 95px;
+
+  @include sm {
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+  }
+}
+
+.title {
+  margin: 0 0 37px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.column {
+  &:last-child {
+    @include md {
+      width: 40%;
+    }
+
+    @include sm {
+      margin-top: 40px;
+      width: 100%;
+    }
+  }
+
+  &:nth-child(2) {
+    margin-left: -60px;
+
+    @include md {
+      margin-left: 0;
+    }
+  }
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 37px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+
+  @include xs {
+    font-size: 14px;
+  }
+}
+
+.menuItem {
+  &:not(:last-child) {
+    margin-bottom: 18px;
+  }
+}
+
+.subscribeForm {
+  margin-bottom: 25px;
+  width: 646px;
+  transform: translateY(3px);
+
+  @include md {
+    width: 100%;
+  }
+}
+
+.subscribeFormTitle {
+  margin: 0;
+  margin-bottom: 38px;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-tundora);
+}
+
+.subscribeFormLabel {
+  display: block;
+  border-bottom: 2px solid var(--color-dark);
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.subscribeFormInput {
+  border: none;
+  padding-right: 80px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-dark);
+
+  &::placeholder {
+    color: rgba(#454545, 0.5);
+  }
+}
+
+.subscribeFormButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 13px 10px;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-dark);
+}
+
+.subscribeFormNote {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-tundora);
+}

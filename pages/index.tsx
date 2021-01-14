@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next'
 import IndexPageContent from '../components/IndexPage/PageContent'
+import Footer from '../components/shared/Footer'
 import Header from '../components/shared/Header/Header'
 import { detectInitialDeviceType } from '../utils/detectInitialDeviceType'
 import { mainNav } from '../utils/testData'
@@ -25,6 +26,7 @@ const Index = () => {
     <div className='site-wrapper'>
       <Header navData={mainNav} />
       <IndexPageContent />
+      <Footer />
     </div>
   )
 }
