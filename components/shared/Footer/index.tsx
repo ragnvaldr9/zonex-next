@@ -1,16 +1,27 @@
 import clsx from 'clsx'
-import { url } from 'inspector'
-import { FC } from 'react'
+import React, { FC } from 'react'
 import About from './About'
 
 import css from './footer.module.scss'
+import { FooterMain } from './FooterMain'
 
-const Footer: FC = () => {
+export enum FooterView {
+  SMALL = 'footer-small',
+  DETAIL = 'footer-detail',
+}
+
+export type FooterProps = {
+  showAboutSection?: boolean,
+  view: FooterView,
+}
+
+const Footer: FC<FooterProps> = ({ showAboutSection, view }) => {
   return (
     <footer>
       <div className={clsx('container', css.container)}>
         <div className={css.content}>
-          <About />
+          {showAboutSection && <About />}
+          <FooterMain view={view} />
         </div>
       </div>
     </footer>

@@ -1,0 +1,25 @@
+.socials {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-right: 29px;
+  }
+}
+
+.link {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+}
+

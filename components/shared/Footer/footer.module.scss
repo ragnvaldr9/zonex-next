@@ -54,9 +54,29 @@
   }
 }
 
+.footerMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding: 40px 0;
+
+  @include xs {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+}
+
+.footerMenu {
+  @include xs {
+    margin-bottom: 20px;
+  }
+}
+
+
+// Clean later, after finishing other pages
+
 /*
-
-
 .footer {
   &__container {
     max-width: 1920px;

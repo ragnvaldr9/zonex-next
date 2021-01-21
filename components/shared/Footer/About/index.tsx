@@ -9,7 +9,7 @@ const aboutData = {
     links: [
       {
         text: 'Phone: +866.597.2742',
-        url: '+866.597.2742'
+        url: 'tel:+8665972742'
       },
       {
         text: 'Live chat',
@@ -64,7 +64,7 @@ const About: FC = () => {
     <ul>
       {links.map((link) => {
         return (
-          <li className={css.menuItem}>
+          <li className={css.menuItem} key={link.text}>
             <FooterLink url={link.url} text={link.text} />
           </li>
         )
