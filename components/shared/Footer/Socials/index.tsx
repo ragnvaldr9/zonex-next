@@ -1,30 +1,10 @@
 import { injectBackgroundImage } from '../../../../utils/injectBackgroundImage'
+import { useTestData } from '../../../context/TestDataContext'
 import css from './socials.module.scss'
 
 const Socials = () => {
 
-  const items = [
-    {
-      id: '1',
-      url: '/',
-      icon: 'images/png-icons/tw.png'
-    },
-    {
-      id: '2',
-      url: '/',
-      icon: 'images/png-icons/fb.png'
-    },
-    {
-      id: '3',
-      url: '/',
-      icon: 'images/png-icons/in.png'
-    },
-    {
-      id: '4',
-      url: '/',
-      icon: 'images/png-icons/pin.png'
-    },
-  ]
+  const items = useTestData('socials')
 
   if (!items.length) return null
 

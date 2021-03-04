@@ -1,25 +1,27 @@
 import clsx from 'clsx'
 import { FC, useState } from 'react'
+import { useTestData } from '../../context/TestDataContext'
 import Product from '../../shared/Product/Product'
 import LoadMore from '../../_ui-elements/LoadMore/LoadMore'
 import MainLink from '../../_ui-elements/MainLink/MainLik'
 import css from './mainProducts.module.scss'
 
-const nav = [
-  { idx: 0, name: 'Best Sellers', to: '/?q=best' },
-  { idx: 1, name: 'New Products', to: '/?q=new' },
-  { idx: 2, name: 'Sale Products', to: '/?=sale' }
-]
+type NavItemType = {
+  idx: number
+  name: string
+  to: string
+}
 
-const products = [
-  {id: 1, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-1.jpg', price: 100, currency: '$', link: '/'},
-  {id: 2, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-2.jpg', price: 100, currency: '$', link: '/'},
-  {id: 3, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-3.jpg', price: 100, currency: '$', link: '/'},
-  {id: 4, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-4.jpg', price: 100, currency: '$', link: '/'},
-  {id: 5, title: 'Eye Mesh Boat Shoes', image: 'images/main/products/prod-5.jpg', price: 100, currency: '$', link: '/'},
-]
+type ProductType = {
+  id: number
+  title: string
+  image: string
+  price: number
+  currency: string
+  link: string
+}
 
-const MainProductsNav: FC = () => {
+const MainProductsNav: FC<{ nav: NavItemType[] }> = ({ nav }) => {
   const [current, setCurrent] = useState(0)
 
   return (
@@ -35,7 +37,7 @@ const MainProductsNav: FC = () => {
   )
 }
 
-const MainProductsList: FC = () => (<ul className={css.grid}>
+const MainProductsList: FC<{ products: ProductType[] }> = ({ products }) => (<ul className={css.grid}>
   {products.map(product => (
     <li key={product.id} className={css.item}>
       <Product {...product} />
@@ -44,11 +46,13 @@ const MainProductsList: FC = () => (<ul className={css.grid}>
 </ul>)
 
 const MainProducts: FC = () => {
+  const { nav, products } = useTestData('mainProducts')
+  
   return (
     <section>
       <div className={clsx('container', css.container)}>
-        <MainProductsNav />
-        <MainProductsList />
+        <MainProductsNav nav={nav} />
+        <MainProductsList products={products} />
         <div className={css.btnCenter}>
           <LoadMore />
         </div>

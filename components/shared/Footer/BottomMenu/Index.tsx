@@ -1,21 +1,11 @@
+import { useTestData } from "../../../context/TestDataContext"
 import { FooterLink } from "../FooterLink"
 
 import css from './bottomMenu.module.scss'
 
 const BottomMenu = () => {
   
-  const items =  [
-    {
-      id: 1,
-      text: 'Returns Policy',
-      url: '/'
-    },
-    {
-      id: 2,
-      text: 'Privacy Policy',
-      url: '/'
-    },
-  ]
+  const items =  useTestData('bottomMenu')
 
   if (!items.length) return null
   

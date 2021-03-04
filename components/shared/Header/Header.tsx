@@ -5,8 +5,12 @@ import clsx from 'clsx'
 import Responsive from '../../_utils/Responsive/Responsive'
 import HeaderTools from './HeaderTools'
 import HeaderNavMobile from './HeaderNavMobile/HeaderNavMobile'
+import { useTestData } from '../../context/TestDataContext'
 
-const Header: React.FC<{ navData: Array<TNavItem> }> = ({ navData }) => {
+const Header: React.FC = () => {
+
+  const navData = useTestData('navData');
+
   return (
     <header className={css.header}>
       <div className={clsx(css.headerInner, 'container', 'container-narrow ')}>

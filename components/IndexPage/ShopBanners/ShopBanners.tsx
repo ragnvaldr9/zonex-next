@@ -2,13 +2,9 @@ import clsx from "clsx"
 import Link from "next/link"
 import { type } from "os"
 import { FC } from "react"
+import { useTestData } from "../../context/TestDataContext"
 import MainLink from "../../_ui-elements/MainLink/MainLik"
 import css from './shopBanners.module.scss'
-
-const banners = [
-  {id: 1, title: 'Men’s Sportswear', url: '/', img: 'images/main/shop-banners/banner-1.jpg'},
-  {id: 2, title: 'Find your fit', url: '/', img: 'images/main/shop-banners/banner-2.jpg'},
-]
 
 type TShopBanner = {
   title: string,
@@ -26,6 +22,9 @@ const ShopBanner: FC<TShopBanner> = ({ title, url, img }) => (
 ) 
 
 const ShopBanners: FC = () => {
+
+  const banners = useTestData('shopBanners')
+
   return (
     <section className={css.section}>
       <div className={clsx('container', css.container)}>
