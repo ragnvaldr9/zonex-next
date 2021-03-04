@@ -2,11 +2,9 @@ import clsx from 'clsx'
 import { FC } from 'react'
 import SwiperCore, { Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { mainHeroItems } from '../../../utils/testData'
+import { useTestData } from '../../context/TestDataContext'
 
 import css from './indexHero.module.scss'
-
-const items = mainHeroItems
 
 type THeroItem = {
   title: string
@@ -16,6 +14,7 @@ type THeroItem = {
 }
 
 const IndexHero: FC = () => {
+  const items = useTestData('mainHeroItems')
 
   SwiperCore.use([Pagination])
 
